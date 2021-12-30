@@ -1,3 +1,17 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": ["eslint:recommended", "next", "next/core-web-vitals"],
+  "rules": {
+    "@next/next/no-img-element": "off", // next/image 사용 안함
+    "react/no-unescaped-entities": 0, // 특수문자 사용 가능(ex)&apos;)
+    "import/no-anonymous-default-export": "off",
+    "no-prototype-builtins": 0,
+    "no-unused-vars": "warn", // 사용하지 않는 변수 warn
+    "no-irregular-whitespace": 0, // 공백 허용
+    "no-constant-condition": 0 // while(true) 허용
+  }
 }
