@@ -1,20 +1,13 @@
 import { NextPage } from 'next';
 import axios from 'axios';
 import Head from 'next/head';
+import { ProductItemType } from '../types/Product';
+import ProductList from '../src/components/ProductList';
 
-interface ListItemType {
-  id: number;
-  name: string;
-  brand: string;
-  price: string;
-  image_link: string;
-  description: string;
-  created_at: Date;
-}
-type ListType = Array<ListItemType>;
+type ProductsType = Array<ProductItemType>;
 
 interface HomeProps {
-  list: ListType;
+  list: ProductsType;
 }
 
 const Home: NextPage<HomeProps> = ({ list }) => {
@@ -25,7 +18,12 @@ const Home: NextPage<HomeProps> = ({ list }) => {
         <meta name="description" content="Home 입니다." />
       </Head>
       <section className="page-wrap">
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
+        <div className="text-xl font-bold pt-10">베스트 상품</div>
+        <div className="w-full border-b-2 border-neutral-200 mt-4 mb-4" />
+        <ProductList list={list.slice(0, 9)} />
+        <div className="text-xl font-bold pt-10">신상품</div>
+        <div className="w-full border-b-2 border-neutral-200 mt-4 mb-4" />
+        <ProductList list={list.slice(9)} />
       </section>
     </>
   );
@@ -35,7 +33,7 @@ export async function getServerSideProps() {
   const API_URL =
     'http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline';
   const res = await axios.get(API_URL);
-  const data: ListType = res.data;
+  const data: ProductItemType = res.data;
 
   return {
     props: {

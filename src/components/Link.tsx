@@ -4,7 +4,7 @@ import NextLink from 'next/link';
 interface LinkProps {
   children: ReactNode;
   href: string;
-  className: string;
+  className?: string;
 }
 
 function Link({ children, href, className }: LinkProps) {
