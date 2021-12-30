@@ -25,7 +25,7 @@ const Home: NextPage<HomeProps> = ({ list }) => {
         <meta name="description" content="Home 입니다." />
       </Head>
       <section className="page-wrap">
-        <a className="nav-item">aaa</a>
+        <h1 className="text-3xl font-bold underline">Hello world!</h1>
       </section>
     </>
   );
