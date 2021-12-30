@@ -14,3 +14,9 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.page-wrap{
+  width: 1000px;
+  border: 1px solid red;
+  margin: 0 auto;
+}
