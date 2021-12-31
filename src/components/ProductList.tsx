@@ -18,7 +18,7 @@ function ProductList({ list }: ProductListProps) {
 
 function ProductItem({ item }: { item: ProductItemType }) {
   return (
-    <Link href={`/view/${item.id}`}>
+    <Link href={`/detail/${item.id}`}>
       <div className="pb-5 text-center">
         <img
           className="block mt-0 mb-0 m-auto"
