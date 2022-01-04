@@ -20,7 +20,26 @@ function ProductList({ list }: ProductListProps) {
 function ProductItem({ item }: { item: ProductItemType }) {
   return (
     <Link href={`/detail/${item.id}`}>
+      <style jsx>
+        {`
+          .image-test {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            background-image: url(${item.image_link});
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+          }
+        `}
+      </style>
       <div className="pb-5 text-center">
+        {/* <div className="image-test" /> */}
+        {/* <div
+          className="w-[150px] h-[150px] bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${item.image_link})` }}
+        /> */}
+
         <Image
           className="block mt-0 mb-0 m-auto"
           src={item.image_link}
