@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { ReactQueryProvider } from '../src/context/react-query-context';
 import Gnb from '../src/components/Gnb';
 import Loading from '../src/components/Loading';
 import '../styles/globals.css';
@@ -28,7 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     };
   }, [router]);
   return (
-    <>
+    <ReactQueryProvider>
       <Head>
         <title>Default</title>
         <meta name="description" content="default 설정 입니다." />
@@ -36,7 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       {isLoading && <Loading />}
       <Gnb />
       <Component {...pageProps} />
-    </>
+    </ReactQueryProvider>
   );
 }
 
