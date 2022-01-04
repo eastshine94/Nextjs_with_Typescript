@@ -1,5 +1,5 @@
 import { GetServerSidePropsContext, NextPage } from 'next';
-import axios, { AxiosAdapter } from 'axios';
+import axios, { AxiosAdapter, AxiosRequestConfig } from 'axios';
 import Head from 'next/head';
 import { ProductItemType } from '../types/Product';
 import ProductList from '../src/components/ProductList';
@@ -36,9 +36,19 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     'public, s-maxage=10, stale-while-revalidate=59'
   );
 
+  const config: AxiosRequestConfig & { Accept: string } = {
+    Accept: 'application/json',
+    headers: { 'Cache-Control': 'no-cache' },
+    adapter: cacheAdapterEnhancer(axios.defaults.adapter as AxiosAdapter, {
+      enabledByDefault: false
+    })
+  };
+
+  const instance = axios.create(config);
+
   const API_URL =
     'http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline';
-  const res = await axios.get(API_URL);
+  const res = await instance.get(API_URL, { cache: true });
   const data: ProductItemType = res.data;
 
   return {
