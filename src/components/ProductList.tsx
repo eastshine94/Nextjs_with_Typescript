@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import { ProductItemType } from '../../types/Product';
 import Link from './Link';
@@ -20,9 +21,11 @@ function ProductItem({ item }: { item: ProductItemType }) {
   return (
     <Link href={`/detail/${item.id}`}>
       <div className="pb-5 text-center">
-        <img
+        <Image
           className="block mt-0 mb-0 m-auto"
           src={item.image_link}
+          width="150"
+          height="150"
           alt={item.name}
         />
         <div className="line-clamp-2 w-40 mb-2 mt-2 m-auto text-sky-700 text-sm">

@@ -2,6 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import css from 'styled-jsx/css';
 import Link from './Link';
+import Image from 'next/image';
 
 interface MenuTabType {
   title: string;
@@ -65,7 +66,14 @@ function Gnb() {
 
       <header className="wrap">
         <div className="header-wrap">
-          <img src="/images/logo.png" alt="logo" className="logo" />
+          <Image
+            src="/images/logo.png"
+            layout="fixed"
+            width={80}
+            height={80}
+            alt="logo"
+            className="logo"
+          />
           <div className="title">Header</div>
         </div>
         <nav>

@@ -1,6 +1,8 @@
 import React, { MouseEvent } from 'react';
 import { GetServerSidePropsContext } from 'next';
-import axios from 'axios';
+import Image from 'next/image';
+import axios, { AxiosAdapter } from 'axios';
+import { cacheAdapterEnhancer } from 'axios-extensions';
 import Head from 'next/head';
 import { ProductItemType } from '../../types/Product';
 import Button from '../../src/components/Button';
@@ -16,7 +18,14 @@ function Post({ item }: { item: ProductItemType }) {
       <div className="page-wrap">
         <div className="flex my-10 mx-0 ">
           <div className="flex-[200px_0_0]">
-            <img className="block" src={image_link} alt={name} />
+            <Image
+              className="block"
+              layout="fixed"
+              width={160}
+              height={180}
+              src={image_link}
+              alt={name}
+            />
           </div>
           <div className="flex-[1_0_0]">
             <div className="font-bold text-[24px] mt-5">{name}</div>
@@ -51,7 +60,16 @@ export async function getServerSideProps(
 ) {
   const id = context.params?.id;
   const API_URL = `http://makeup-api.herokuapp.com/api/v1/products/${id}.json`;
-  const res = await axios.get(API_URL);
+  const config = {
+    Accept: 'application/json',
+    headers: { 'Cache-Control': 'no-cache' },
+    adapter: cacheAdapterEnhancer(axios.defaults.adapter as AxiosAdapter, {
+      enabledByDefault: false
+    })
+  };
+  const instance = axios.create(config);
+
+  const res = await instance.get(API_URL, { cache: true });
   const data = res.data;
 
   return {
