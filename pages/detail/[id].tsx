@@ -36,7 +36,7 @@ function Post({ item }: { item: ProductItemType }) {
             </div>
 
             <Button
-              color="orange"
+              color="#ff9c2f"
               content="구매하기"
               onClick={(e: MouseEvent<HTMLElement>) => {
                 e.preventDefault();
