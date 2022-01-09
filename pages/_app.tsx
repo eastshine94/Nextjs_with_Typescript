@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ReactQueryProvider } from '../src/context/react-query-context';
 import Gnb from '../src/components/Gnb';
+import Footer from '../src/components/Footer';
 import Loading from '../src/components/Loading';
 import '../styles/globals.css';
 
@@ -37,6 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       {isLoading && <Loading />}
       <Gnb />
       <Component {...pageProps} />
+      <Footer />
     </ReactQueryProvider>
   );
 }
